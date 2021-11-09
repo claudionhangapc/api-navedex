@@ -2,7 +2,7 @@
   "name": "api-navedex",
   "version": "1.0.0",
   "description": "API de  de um sistema web para visualização e criação dos navers, com autenticação e possuindo informações como: nomes, idades, cargos, tempo de empresa e projetos que participou",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
@@ -19,7 +19,9 @@
   "homepage": "https://github.com/claudionhangapc/api-navedex#readme",
   "dependencies": {
     "dotenv": "^10.0.0",
-    "fastify": "^3.23.1"
+    "fastify": "^3.23.1",
+    "knex": "^0.95.13",
+    "pg": "^8.7.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.14"

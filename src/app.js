@@ -8,4 +8,5 @@ app.get('/', async(request, reply)=>{
   }
 })
 
+console.log(__dirname)
 module.exports = app;
