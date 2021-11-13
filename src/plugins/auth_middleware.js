@@ -4,7 +4,8 @@ const fastifyPlugin = require("fastify-plugin")
 async function auth(fastify,options){
   fastify.decorate('authenticate', async function(request, response){
     try{
-      await request.jwtVerify()
+      const whoiam = await request.jwtVerify()
+      request.whoiam  = whoiam
     }catch(err){
       response.send(err)
     }

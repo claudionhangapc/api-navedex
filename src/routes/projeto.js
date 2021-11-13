@@ -1,9 +1,9 @@
-//const projeto = require('../service/projeto')
+const projeto = require('../service/projeto')
 
 
 module.exports  = function(fastify, option, done){
 
-  //const projetoInstance = new user(fastify)
+  const projetoInstance = new projeto(fastify)
 
   /*
   * rota para obter todos projetos
@@ -14,9 +14,29 @@ module.exports  = function(fastify, option, done){
     preValidation: [fastify.authenticate]
   },
   async (request, reply)=>{
-    reply.send({texto:'ola'})
+
+    const {id} = request.whoiam
+    const result = await projetoInstance.fetch(id)
+    //request.whoiam
+    reply.send(result)
   })
 
+  /*
+  * rota para criar projeto
+  */
+
+  fastify.post('/',
+  {
+    preValidation: [fastify.authenticate]
+  },
+  async (request, reply)=>{
+    const {name} = request.body
+    const {id} = request.whoiam
+
+    const result = await projetoInstance.create(name,id)
+    //request.whoiam
+    reply.send(result)
+  })
 
   
 

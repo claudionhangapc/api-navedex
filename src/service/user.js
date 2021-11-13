@@ -1,7 +1,7 @@
 class User{
 
   constructor(fastify){
-    this.fastify = fastify
+    this.jwt = fastify.jwt
     this.model = fastify.knex('user')
   }
 
@@ -37,7 +37,7 @@ class User{
 
         const {id, email} = result[0]
         const payload = {id, email}
-        const token = this.fastify.jwt.sign(payload)
+        const token = this.jwt.sign(payload)
         return {id,email, token}
 
       }else{
