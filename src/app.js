@@ -2,12 +2,17 @@ const app =  require('fastify')({
   logger: true
 })
 
+
 /*
 * registrar os plugis 
 */
+app.register(require('fastify-jwt'), {
+  secret: 'minhaChaveSecreta'
+})
+
+app.register(require('./plugins/auth_middleware'))
 
 require('./plugins/conection')(app)
-
 
 
 /*
@@ -15,14 +20,7 @@ require('./plugins/conection')(app)
 */
 
 app.register(require('./routes/user'),{ prefix: '/user' })
+app.register(require('./routes/projeto'),{ prefix: '/projeto' })
 
-/*
-app.get('/', async(request, reply)=>{
-  return {
-    hello:'olla'
-  }
-})
-
-*/
 
 module.exports = app;
