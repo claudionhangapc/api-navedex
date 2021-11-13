@@ -1,6 +1,7 @@
 class User{
 
   constructor(fastify){
+    this.fastify = fastify
     this.model = fastify.knex('user')
   }
 
@@ -26,17 +27,32 @@ class User{
   }
 
    /*
-  * login uaurario
+  * login usuário
   */
 
   async login(email,password){
-    let result
     try{
-      result = await this.model.where({email,password}).first()
+      const result = await this.model.where({email,password})
+      if(result.length>0){
+
+        const {id, email} = result[0]
+        const payload = {id, email}
+        const token = this.fastify.jwt.sign(payload)
+        return {id,email, token}
+
+      }else{
+        return {
+
+          statusCode: 400,
+          error: "erro do cliente",
+          message: "usuário não encontrado"
+
+        }
+      }
     }catch(error){
-      result = error
+      return error
     }
-    return result 
+    
   }
 
   async fetch(){

@@ -27,19 +27,8 @@ module.exports  = function(fastify, option, done){
     const {email, password} = request.body
 
     const result = await userInstance.login(email,password)
-    let resultPayload
-    
-    if(result){
-      
-      const {id, email} = result
-      const payload = {id, email}
-      const token = fastify.jwt.sign( payload )
-      
-      resultPayload = {id,email, token}
-    }else{
-      resultPayload=[]
-    }
-    reply.send(resultPayload)
+ 
+    reply.send(result )
   })
 
   done()

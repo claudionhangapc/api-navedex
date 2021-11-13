@@ -18,9 +18,9 @@ require('./plugins/conection')(app)
 /*
 * registrar as rotas
 */
-
-app.register(require('./routes/user'),{ prefix: '/user' })
-app.register(require('./routes/projeto'),{ prefix: '/projeto' })
+app.register(require('./routes/ping'),{ prefix: '/ping' })
+app.register(require('./routes/user'),{ prefix: '/users' })
+app.register(require('./routes/projeto'),{ prefix: '/projetos' })
 
 
 module.exports = app;
