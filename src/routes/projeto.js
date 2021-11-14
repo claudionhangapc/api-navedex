@@ -15,10 +15,14 @@ module.exports  = function(fastify, option, done){
   },
   async (request, reply)=>{
 
-    const {id} = request.whoiam
-    const result = await projetoInstance.fetch(id)
-    //request.whoiam
-    reply.send(result)
+    try{
+      const {id} = request.whoiam
+      const result = await projetoInstance.fetch(id)
+      reply.send(result)
+    }catch(error){
+      reply.send(error)
+    }
+    
   })
 
   /*
@@ -31,11 +35,12 @@ module.exports  = function(fastify, option, done){
   },
   async (request, reply)=>{
     const {name} = request.body
+    const {navers} = request.body
     const {id} = request.whoiam
 
-    const result = await projetoInstance.create(name,id)
+    const result = await projetoInstance.create(name,navers,id)
     //request.whoiam
-    reply.send(result)
+    reply.send({result})
   })
 
   
