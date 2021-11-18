@@ -33,7 +33,7 @@ module.exports  = function(fastify, option, done){
     preValidation: [fastify.authenticate]
   },
   async (request, reply)=>{
-
+    try{
     const {name} = request.body
     const {birthdate} = request.body
     const {admission_date} = request.body
@@ -44,6 +44,10 @@ module.exports  = function(fastify, option, done){
     const result = await naverInstance.create(name,birthdate,admission_date,job_role, projects,id)
     //request.whoiam
     reply.send(result)
+    }catch(error){
+      reply.send(error)
+    }
+
   })
 
   done()

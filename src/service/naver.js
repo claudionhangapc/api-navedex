@@ -12,9 +12,9 @@ class  Naver{
   * metodos ajudadores 
   */
 
-   reduceNaverProjeto(items,id_projeto){
+   reduceNaverProjeto(items,id_naver){
     const naversProjetos = []
-    items.forEach(id_naver=> {
+    items.forEach(id_projeto=> {
       naversProjetos.push({
         id_projeto,
         id_naver,
@@ -47,13 +47,28 @@ class  Naver{
     id_user
   })
 
-  if(this.reduceNaverProjeto(projects,naver[0].id)){ 
-    //this.fastify.knex('naver_projeto').insert(naverProjeto)
+  if(this.reduceNaverProjeto(projects,naver[0].id)){
+    const naverProjeto = await this.reduceNaverProjeto(projects,naver[0].id) 
+    const insertNaverProjeto =  await this.fastify.knex('naver_projeto').insert(naverProjeto)
   }
 
-  const result = await this.fastify.knex.select(['naver.name'])
+  const projeto = await this.fetchSingleNaverAndAllProject(naver[0].id)
+  const resultNaver = naver[0]
+  resultNaver.projects = projeto
+
+  return resultNaver
+ }
+
+ /*
+  * obeter um naver e os 
+  * projetos na qual 
+  * na qual participa
+  */
+
+ async fetchSingleNaverAndAllProject(naver_id){
+  const result = await this.fastify.knex.select(['projeto.id','projeto.name'])
   .table('naver_projeto')
-  .innerJoin('naver','naver.id','naver_projeto.id_naver').where('naver.id',8)
+  .innerJoin('naver','naver.id','naver_projeto.id_naver').where('naver.id',naver_id)
   .innerJoin('projeto','projeto.id','naver_projeto.id_projeto')
 
   return result
