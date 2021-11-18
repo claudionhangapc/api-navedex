@@ -47,7 +47,7 @@ class  Naver{
     id_user
   })
 
-  if(this.reduceNaverProjeto(projects,naver[0].id)){
+  if(projects.length>0){
     const naverProjeto = await this.reduceNaverProjeto(projects,naver[0].id) 
     const insertNaverProjeto =  await this.fastify.knex('naver_projeto').insert(naverProjeto)
   }
