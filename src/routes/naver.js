@@ -24,6 +24,26 @@ module.exports  = function(fastify, option, done){
     }
   })
 
+   /*
+  * obter um unico naver
+  */
+
+   fastify.get('/:id',
+   {
+     preValidation: [fastify.authenticate]
+   },
+   async (request, reply)=>{
+ 
+     try{
+       const id_user = request.whoiam.id
+       const id_naver = request.params.id
+       const result = await naverInstance.fetchNaverById(id_user,id_naver)
+       reply.send(result)
+     }catch(error){
+       reply.send(error)
+     }
+   })
+
   /*
   * criar naver
   */

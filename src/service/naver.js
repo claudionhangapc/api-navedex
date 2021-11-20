@@ -60,9 +60,8 @@ class  Naver{
  }
 
  /*
-  * obeter um naver e os 
-  * projetos na qual 
-  * na qual participa
+  * obeter os projetos
+  * projetos de um naver
   */
 
  async fetchSingleNaverAndAllProject(naver_id){
@@ -74,6 +73,24 @@ class  Naver{
   return result
  }
  
+  /*
+  * obeter um naver e os 
+  * projetos na qual 
+  * na qual participa
+  */
+
+ async fetchNaverById(id_user,id){
+  const naver = await this.model.select('id','name',' birthdate','admission_date','job_role').where({id_user,id})
+
+  const projeto = await this.fetchSingleNaverAndAllProject(naver[0].id)
+  const resultNaver = naver[0]
+  resultNaver.projects = projeto
+
+  return resultNaver
+
+ }
+
+
 }
 
 module.exports = Naver
