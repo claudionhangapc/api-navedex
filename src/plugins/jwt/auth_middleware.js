@@ -2,6 +2,16 @@ const fastifyPlugin = require("fastify-plugin")
 
 
 async function auth(fastify,options){
+  /*
+  *
+  */
+  fastify.register(require('fastify-jwt'), {
+    secret: 'minhaChaveSecreta'
+  })
+
+  /*
+  *
+  */
   fastify.decorate('authenticate', async function(request, response){
     try{
       const whoiam = await request.jwtVerify()

@@ -16,7 +16,7 @@ class User{
     try{
 
       const bcrypt = require('bcrypt')
-
+      
       const user =  await this.model.insert({
         email,
         password:bcrypt.hashSync(password, PASSWORD_SALT)

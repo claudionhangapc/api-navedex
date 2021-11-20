@@ -6,11 +6,8 @@ const app =  require('fastify')({
 /*
 * registrar os plugis 
 */
-app.register(require('fastify-jwt'), {
-  secret: 'minhaChaveSecreta'
-})
 
-app.register(require('./plugins/auth_middleware'))
+app.register(require('./plugins/jwt/auth_middleware'))
 
 require('./plugins/conection')(app)
 
