@@ -23,7 +23,9 @@
     "fastify": "^3.23.1",
     "fastify-jwt": "^3.2.1",
     "fastify-plugin": "^3.0.0",
+    "fs": "^0.0.1-security",
     "knex": "^0.95.13",
+    "path": "^0.12.7",
     "pg": "^8.7.1"
   },
   "devDependencies": {
