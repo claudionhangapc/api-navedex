@@ -8,6 +8,7 @@ async function auth(fastify,options){
   * registra as chaves 
   * do certificado
   */
+ 
   fastify.register(require('fastify-jwt'), {
     secret: {
       private: readFileSync(`${path.join(__dirname, 'certs')}/private.key`, 'utf8'),

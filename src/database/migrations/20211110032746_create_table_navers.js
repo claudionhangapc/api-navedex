@@ -16,6 +16,7 @@ exports.up = function(knex) {
          .notNullable()
     table.foreign('id_user')
       .references('user.id')
+      .onDelete('CASCADE')
     
   })
 };

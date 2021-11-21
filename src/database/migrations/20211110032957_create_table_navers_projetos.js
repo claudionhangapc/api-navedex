@@ -8,12 +8,14 @@ exports.up = function(knex) {
          .notNullable()
     table.foreign('id_naver')
     .references('naver.id')
+    .onDelete('CASCADE')
 
     table.integer('id_projeto')
          .unsigned()
          .notNullable()
     table.foreign('id_projeto')
     .references('projeto.id')
+    .onDelete('CASCADE')
     
   })
 };
