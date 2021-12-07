@@ -8,3 +8,6 @@ API de um sistema web para visualização e criação dos navers, com autentica�
 - [x] PostgreSQL - você pode saber mais <a href="https://www.postgresql.org/">aqui</a>
 
 ## Instalação
+1. Clona o projeto em diretório na tua maquina.
+2. Cria um banco de dados de nome 'navedex' ```CREATE DATABASE navedex; ```
+
