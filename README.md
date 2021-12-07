@@ -10,4 +10,7 @@ API de um sistema web para visualização e criação dos navers, com autentica�
 ## Instalação
 1. Clona o projeto em diretório na tua maquina.
 2. Cria um banco de dados de nome 'navedex' ```CREATE DATABASE navedex; ```
+3. Entra na pasta raiz do projeto e executa o seguinte comando na linha de comando  ``` npm install ```
+4. No arquivo .env localizado na raiz do projeto altere os valores das variaveis de ambiente POSTGRES_USER e POSTGRES_PORT de acordo com o definido na tua instancia do PostgreSQL.
+5. Ainda na raiz do projeto execute o comando para criar as tabelas do banco de dados ``` npx knex migrate:latest ```
 
