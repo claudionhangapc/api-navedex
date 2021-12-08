@@ -1,14 +1,13 @@
-const fastifyPlugin = require("fastify-plugin")
+const fastifyPlugin = require('fastify-plugin')
 const { readFileSync } = require('fs')
 const path = require('path')
 
-async function auth(fastify,options){
-
+async function auth (fastify, options) {
   /*
-  * registra as chaves 
+  * registra as chaves
   * do certificado
   */
- 
+
   fastify.register(require('fastify-jwt'), {
     secret: {
       private: readFileSync(`${path.join(__dirname, 'certs')}/private.key`, 'utf8'),
@@ -21,15 +20,15 @@ async function auth(fastify,options){
   * adicionando o authenticate
   * func no decorador
   */
- 
-  fastify.decorate('authenticate', async function(request, response){
-    try{
+
+  fastify.decorate('authenticate', async function (request, response) {
+    try {
       const whoiam = await request.jwtVerify()
-      request.whoiam  = whoiam
-    }catch(err){
+      request.whoiam = whoiam
+    } catch (err) {
       response.send(err)
     }
   })
 }
 
-module.exports =  fastifyPlugin(auth)
+module.exports = fastifyPlugin(auth)
