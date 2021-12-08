@@ -1,7 +1,7 @@
 require('dotenv').config({
   path: './'
 })
-const server = require("./src/app")
+const server = require('./src/app')
 
 const port = process.env.Port || 3000
 
