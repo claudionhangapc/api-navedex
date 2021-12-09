@@ -150,17 +150,17 @@ Example Response 200 ok
 
 - Body
   [
-  {
-    "id": 10,
-    "name": "trabalhando com java"
-  },
-  {
-    "id": 11,
-    "name": "desenvolvimento de loja virtual"
-  },
-  {
-    "id": 12,
-    "name": "wordpress"
-  }
+    {
+      "id": 10,
+      "name": "trabalhando com java"
+    },
+    {
+      "id": 11,
+      "name": "desenvolvimento de loja virtual"
+    },
+    {
+      "id": 12,
+      "name": "wordpress"
+    }
   ]
 ```
