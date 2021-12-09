@@ -22,7 +22,7 @@ API de um sistema web para visualização e criação dos navers, com autentica�
 
 ## Detalhes da api
 
-### Criar usuário - rotas publicas
+### usuário (publicas)
 
 #### POST signup
 
