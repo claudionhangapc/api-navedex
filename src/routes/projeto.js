@@ -1,6 +1,7 @@
 const projeto = require('../service/projeto')
 
 module.exports = function (fastify, option, done) {
+  // eslint-disable-next-line new-cap
   const projetoInstance = new projeto(fastify)
 
   /*
@@ -12,9 +13,7 @@ module.exports = function (fastify, option, done) {
   },
   async (request, reply) => {
     try {
-      const {
-        id
-      } = request.whoiam
+      const { id } = request.whoiam
       const result = await projetoInstance.fetch(id)
       reply.send(result)
     } catch (error) {
@@ -30,21 +29,15 @@ module.exports = function (fastify, option, done) {
     preValidation: [fastify.authenticate]
   },
   async (request, reply) => {
-    const {
-      name
-    } = request.body
-    const {
-      navers
-    } = request.body
-    const {
-      id
-    } = request.whoiam
+    try {
+      const { name } = request.body
+      const { id } = request.whoiam
 
-    const result = await projetoInstance.create(name, navers, id)
-    // request.whoiam
-    reply.send({
-      result
-    })
+      const projeto = await projetoInstance.create(name, id)
+      reply.send(projeto)
+    } catch (error) {
+      reply.send(error)
+    }
   })
 
   done()

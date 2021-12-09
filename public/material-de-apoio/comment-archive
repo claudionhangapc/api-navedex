@@ -1,0 +1,7 @@
+/*
+  if (navers.length > 0) {
+      const valuesNaverProjeto = this.reduceNaverProjeto(navers, id_user)
+      /* const naverProjeto = this.fastify.knex('naver_projeto').insert( valuesNaverProjeto)
+      return valuesNaverProjeto */
+    }
+  */

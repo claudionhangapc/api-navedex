@@ -22,7 +22,7 @@ API de um sistema web para visualização e criação dos navers, com autentica�
 
 ## Detalhes da api
 
-### usuário (publica)
+### Usuário (publica)
 
 #### criar um novo usuário
 
@@ -85,5 +85,43 @@ Example Response 200 ok
   "id": 10,
   "email": "claudi5@gmail.com",
   "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImVtYWlsIjoiY2xhdWRpNUBnbWFpbC5jb20iLCJpYXQiOjE2MzkwMjA0ODd9.gXMIVqBla5_c1Dd4oVdC5PElsszLsUvP1-FvVwKGZ6-t-OC6All5je7bcTLDwufWmw0L41YNTV9x_2V-pi4kcOvDhkngy5kSIaenEPc4FKN63Oo2Pg9W9KEHBsKmQFwxtGgcesexa2Et7rt3tIWfn5Z3YrdLSxDgrCWqMhiWQpw"
+  }
+```
+
+### Projeto (privada)
+
+#### criar um novo projeto
+
+##### POST create
+
+`http://localhost:3000/projetos`
+
+AUTHORIZATION Bearer Token
+
+Token - eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImVtYWlsIjoiY2xhdWRpNUBnbWFpbC5jb20iLCJpYXQiOjE2MzkwMjA0ODd9.gXMIVqBla5_c1Dd4oVdC5PElsszLsUvP1-FvVwKGZ6-t-OC6All5je7bcTLDwufWmw0L41YNTV9x_2V-pi4kcOvDhkngy5kSIaenEPc4FKN63Oo2Pg9W9KEHBsKmQFwxtGgcesexa2Et7rt3tIWfn5Z3YrdLSxDgrCWqMhiWQpw
+
+Example Request
+
+```
+curl --location --request POST 'http://localhost:3000/projetos' \
+--data-raw '{
+    "name":"wordpress"
+}'
+```
+
+Example Response 200 ok
+
+```
+- Header
+  content-type: application/json; charset=utf-8
+  content-length: 28
+  Date: Thu, 09 Dec 2021 04:00:15 GMT
+  Connection: keep-alive
+  Keep-Alive: timeout=5
+
+- Body
+  {
+  "id": 12,
+  "name": "wordpress"
   }
 ```

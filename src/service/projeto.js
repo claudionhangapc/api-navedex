@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 class Projeto {
   constructor (fastify) {
     this.model = fastify.knex('projeto')
@@ -34,19 +35,12 @@ class Projeto {
    * criar projeto
    * de um determina usuario
    */
-  async create (name, navers, id_user) {
+  async create (name, id_user) {
     const projeto = await this.model.returning(['id', 'name']).insert({
       name,
       id_user
     })
-
-    if (navers.length > 0) {
-      const valuesNaverProjeto = this.reduceNaverProjeto(navers, id_user)
-      /* const naverProjeto = this.fastify.knex('naver_projeto').insert( valuesNaverProjeto) */
-      return valuesNaverProjeto
-    }
-
-    return navers.length
+    return projeto[0]
   }
 }
 
