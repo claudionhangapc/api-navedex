@@ -1,6 +1,6 @@
 # api-navedex
 
-API de um sistema web para visualização e criação dos navers, com autenticação e possuindo informações como: nomes, idades, cargos, tempo de empresa e projetos que participa.
+API de um sistema web para visualização e criação dos navers, com autenticação e possuindo informações como: nomes, idades, cargos, tempo de empresa e projetos que participa. A documentação completa api desenvolvida pode ser acessada neste <a href="https://documenter.getpostman.com/view/14806594/UVJkBtfB">aqui</a>
 
 ## Modelo Lógico
 
