@@ -98,8 +98,6 @@ Example Response 200 ok
 
 AUTHORIZATION Bearer Token
 
-Token - eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImVtYWlsIjoiY2xhdWRpNUBnbWFpbC5jb20iLCJpYXQiOjE2MzkwMjA0ODd9.gXMIVqBla5_c1Dd4oVdC5PElsszLsUvP1-FvVwKGZ6-t-OC6All5je7bcTLDwufWmw0L41YNTV9x_2V-pi4kcOvDhkngy5kSIaenEPc4FKN63Oo2Pg9W9KEHBsKmQFwxtGgcesexa2Et7rt3tIWfn5Z3YrdLSxDgrCWqMhiWQpw
-
 Example Request
 
 ```
@@ -124,4 +122,45 @@ Example Response 200 ok
   "id": 12,
   "name": "wordpress"
   }
+```
+
+#### lista todos projetos
+
+##### GET index
+
+`http://localhost:3000/projetos`
+
+AUTHORIZATION Bearer Token
+
+Example Request
+
+```
+curl --location --request GET 'http://localhost:3000/projetos'
+```
+
+Example Response 200 ok
+
+```
+- Header
+  content-type: application/json; charset=utf-8
+  content-length: 121
+  Date: Thu, 09 Dec 2021 04:10:37 GMT
+  Connection: keep-alive
+  Keep-Alive: timeout=5
+
+- Body
+  [
+  {
+    "id": 10,
+    "name": "trabalhando com java"
+  },
+  {
+    "id": 11,
+    "name": "desenvolvimento de loja virtual"
+  },
+  {
+    "id": 12,
+    "name": "wordpress"
+  }
+  ]
 ```
