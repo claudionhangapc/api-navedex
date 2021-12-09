@@ -22,7 +22,7 @@ API de um sistema web para visualização e criação dos navers, com autentica�
 
 ## Detalhes da api
 
-### Criar usuário
+### Criar usuário - rotas publicas
 
 #### POST signup
 
@@ -42,7 +42,6 @@ Example Response 200 ok
 
 ```
 - Header
-
   content-type: application/json; charset=utf-8
   content-length: 4
   Date: Thu, 09 Dec 2021 03:05:27 GMT
@@ -50,6 +49,37 @@ Example Response 200 ok
   Keep-Alive: timeout=5
 
 - Body
-
   true
+```
+
+#### POST login
+
+`http://localhost:3000/users/login`
+
+Example Request
+
+```
+curl --location --request POST 'http://localhost:3000/users/login' \
+--data-raw '{
+    "email":"claudi5@gmail.com",
+    "password":"BI)2KjufPySB0ilcnWkf@Wg)"
+}'
+```
+
+Example Response 200 ok
+
+```
+- Header
+  content-type: application/json; charset=utf-8
+  content-length: 329
+  Date: Thu, 09 Dec 2021 03:28:07 GMT
+  Connection: keep-alive
+  Keep-Alive: timeout=5
+
+- Body
+  {
+  "id": 10,
+  "email": "claudi5@gmail.com",
+  "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImVtYWlsIjoiY2xhdWRpNUBnbWFpbC5jb20iLCJpYXQiOjE2MzkwMjA0ODd9.gXMIVqBla5_c1Dd4oVdC5PElsszLsUvP1-FvVwKGZ6-t-OC6All5je7bcTLDwufWmw0L41YNTV9x_2V-pi4kcOvDhkngy5kSIaenEPc4FKN63Oo2Pg9W9KEHBsKmQFwxtGgcesexa2Et7rt3tIWfn5Z3YrdLSxDgrCWqMhiWQpw"
+  }
 ```
