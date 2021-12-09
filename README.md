@@ -21,3 +21,35 @@ API de um sistema web para visualização e criação dos navers, com autentica�
 6. executa o seguinente comandando `npm run start` para rodar o projeto e copia e cola no navegador a seguinte url `http://localhost:3000/ping` para verificar se a instalação foi bem sucedida.
 
 ## Detalhes da api
+
+### Criar usuário
+
+#### POST signup
+
+`http://localhost:3000/users/signup`
+
+Example Request
+
+```
+curl --location --request POST 'http://localhost:3000/users/signup' \
+--data-raw '{
+    "email":"claudi5@gmail.com",
+    "password":"BI)2KjufPySB0ilcnWkf@Wg)"
+}'
+```
+
+Example Response 200 ok
+
+```
+- Header
+
+  content-type: application/json; charset=utf-8
+  content-length: 4
+  Date: Thu, 09 Dec 2021 03:05:27 GMT
+  Connection: keep-alive
+  Keep-Alive: timeout=5
+
+- Body
+
+  true
+```
