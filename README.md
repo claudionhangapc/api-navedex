@@ -22,9 +22,11 @@ API de um sistema web para visualização e criação dos navers, com autentica�
 
 ## Detalhes da api
 
-### usuário (publicas)
+### usuário (publica)
 
-#### POST signup
+#### criar um novo usuário
+
+##### POST signup
 
 `http://localhost:3000/users/signup`
 
@@ -52,7 +54,9 @@ Example Response 200 ok
   true
 ```
 
-#### POST login
+#### Fazer login com o usuário criado
+
+##### POST login
 
 `http://localhost:3000/users/login`
 
