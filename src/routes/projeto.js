@@ -32,9 +32,15 @@ module.exports = function (fastify, option, done) {
     try {
       const { name } = request.body
       const { id } = request.whoiam
-
-      const projeto = await projetoInstance.create(name, id)
-      reply.send(projeto)
+      const { navers } = request.body
+      const projeto = await projetoInstance.create(name, id, navers)
+      if ('messageError' in projeto) {
+        reply
+          .code(404)
+          .send({ message: ' navers não encontrada' })
+      } else {
+        reply.send(projeto)
+      }
     } catch (error) {
       reply.send(error)
     }

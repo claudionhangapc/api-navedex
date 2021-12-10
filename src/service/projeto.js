@@ -35,11 +35,37 @@ class Projeto {
    * criar projeto
    * de um determina usuario
    */
-  async create (name, id_user) {
-    const projeto = await this.model.returning(['id', 'name']).insert({
-      name,
-      id_user
-    })
+  async create (name, id_user, navers) {
+    let projeto
+    if (navers.length > 0) {
+      const navers_result = await this.fastify.knex.select('id')
+        .from('naver')
+        .whereIn('id', navers)
+      // eslint-disable-next-line no-undef
+      if ((navers_result.length === navers.length)) {
+        projeto = await this.model.returning(['id', 'name']).insert({
+          name,
+          id_user
+        })
+        const navers_projetos = this.reduceNaverProjeto(navers, projeto[0].id)
+        const navers_projetos_result = await this.fastify.knex('naver_projeto').returning(['id_projeto']).insert(navers_projetos)
+
+        projeto[0].navers = navers_projetos_result
+      } else {
+        projeto = []
+        projeto[0] = {
+          messageError: 'error'
+        }
+      }
+    } else {
+      projeto = await this.model.returning(['id', 'name']).insert({
+        name,
+        id_user
+      })
+
+      projeto[0].navers = []
+    }
+
     return projeto[0]
   }
 
