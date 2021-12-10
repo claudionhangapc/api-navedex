@@ -60,5 +60,25 @@ module.exports = function (fastify, option, done) {
     }
   })
 
+  /*
+   * rota para deletar
+   * um projeto
+   */
+
+  fastify.delete('/:id_projeto', {
+    preValidation: [fastify.authenticate]
+  },
+  async (request, reply) => {
+    try {
+      const { id } = request.whoiam
+      // eslint-disable-next-line camelcase
+      const { id_projeto } = request.params
+      const result = await projetoInstance.delete(id, id_projeto)
+      reply.send(result)
+    } catch (error) {
+      reply.send(error)
+    }
+  })
+
   done()
 }

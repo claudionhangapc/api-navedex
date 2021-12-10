@@ -70,6 +70,18 @@ class Projeto {
     }
     return result
   }
+
+  /*
+   * deletar projeto
+   * de um determina usuario
+   */
+  async delete (id_user, id_projeto) {
+    const projeto = await this.model.select().where({
+      'projeto.id': id_projeto,
+      'projeto.id_user': id_user
+    }).del()
+    return projeto
+  }
 }
 
 module.exports = Projeto
