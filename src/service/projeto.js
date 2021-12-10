@@ -42,6 +42,34 @@ class Projeto {
     })
     return projeto[0]
   }
+
+  /*
+   * obter todos projetos
+   * e navers associados
+   */
+  async show (id_user, id_projeto) {
+    let result = await this.model.select(' naver.* ', ' projeto.id as projeto_id ', ' projeto.name as projeto_name').where({
+      'projeto.id': id_projeto,
+      'projeto.id_user': id_user
+    })
+      .innerJoin('naver_projeto', 'projeto.id', 'naver_projeto.id_projeto')
+      .innerJoin('naver', 'naver.id', 'naver_projeto.id_naver')
+
+    if (result.length > 0) {
+      const projeto = {}
+      projeto.id = result[0].projeto_id
+      projeto.name = result[0].projeto_name
+
+      projeto.navers = result.map(function (item) {
+        delete item.projeto_name
+        delete item.projeto_id
+        return item
+      })
+
+      result = projeto
+    }
+    return result
+  }
 }
 
 module.exports = Projeto
