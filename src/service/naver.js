@@ -24,9 +24,9 @@ class Naver {
    * obter todos projetos
    * de um determina usuario
    */
-  async fetchAllById (id) {
-    const result = await this.model.select('id', 'name', ' birthdate', 'admission_date', 'job_role').where({
-      id_user: id
+  async fetchAllById (id_user) {
+    const result = await this.fastify.knex.select('id', 'name', ' birthdate', 'admission_date', 'job_role').from('naver').where({
+      id_user: id_user
     })
     return result
   }

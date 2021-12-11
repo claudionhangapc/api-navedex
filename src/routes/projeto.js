@@ -1,4 +1,5 @@
 const projeto = require('../service/projeto')
+const schema = require('../schema/projeto')
 
 module.exports = function (fastify, option, done) {
   // eslint-disable-next-line new-cap
@@ -26,7 +27,8 @@ module.exports = function (fastify, option, done) {
    */
 
   fastify.post('/', {
-    preValidation: [fastify.authenticate]
+    preValidation: [fastify.authenticate],
+    schema: schema.projetoCreate
   },
   async (request, reply) => {
     try {
@@ -71,7 +73,8 @@ module.exports = function (fastify, option, done) {
    */
 
   fastify.put('/:id_projeto', {
-    preValidation: [fastify.authenticate]
+    preValidation: [fastify.authenticate],
+    schema: schema.projetoUpdate
   },
   async (request, reply) => {
     try {

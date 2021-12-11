@@ -25,7 +25,7 @@ class Projeto {
    * de um determina usuario
    */
   async fetch (id) {
-    const result = await this.model.select('id', 'name').where({
+    const result = await this.fastify.knex.select('id', 'name').from('projeto').where({
       id_user: id
     })
     return result
