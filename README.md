@@ -4,7 +4,7 @@ API de um sistema web para visualização e criação dos navers, com autentica�
 
 ## Modelo Lógico
 
-!["modelo_logico"](public/img/modelo_logico_2.png)
+!["modelo_logico"](public/img/modelo_logico_certo.png)
 
 ## Pré-requisito
 
