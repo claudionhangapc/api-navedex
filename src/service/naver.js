@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 class Naver {
   constructor (fastify) {
     this.model = fastify.knex('naver')
@@ -34,6 +35,7 @@ class Naver {
    * criar projeto
    * de um determina usuario
    */
+  // eslint-disable-next-line camelcase
   async create (name, birthdate, admission_date, job_role, projects, id_user) {
     const naver = await this.model.returning(['id', 'name', 'birthdate', 'admission_date', 'job_role']).insert({
       name,
@@ -86,6 +88,18 @@ class Naver {
     resultNaver.projects = projeto
 
     return resultNaver
+  }
+
+  /*
+   * deletar projeto
+   * de um determina usuario
+   */
+  async delete (id_user, id_naver) {
+    const naver = await this.model.select().where({
+      'naver.id': id_naver,
+      'naver.id_user': id_user
+    }).del()
+    return naver
   }
 }
 

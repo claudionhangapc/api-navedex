@@ -13,14 +13,14 @@ exports.seed = function(knex) {
           id_user:1,
         },
         {
-          job_role: "Teste",
+          job_role: "uy ",
           admission_date: "19/08/2018",
           birthdate: "12/04/1992",
           name: "Daina",
           id_user:1,
         },
         {
-          job_role: "Teste",
+          job_role: " pc",
           admission_date: "19/08/2018",
           birthdate: "12/04/1992",
           name: "Daina",
@@ -30,7 +30,7 @@ exports.seed = function(knex) {
           job_role: "Teste",
           admission_date: "19/08/2018",
           birthdate: "12/04/1992",
-          name: "Daina",
+          name: "Daina real",
           id_user:2,
         }
       ]);

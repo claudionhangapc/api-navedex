@@ -25,7 +25,8 @@ module.exports = function (fastify, option, done) {
   })
 
   /*
-   * obter um unico naver
+   * rota para mostra um naver
+   * e projetos assossiados
    */
 
   fastify.get('/:id', {
@@ -60,6 +61,26 @@ module.exports = function (fastify, option, done) {
 
       const result = await naverInstance.create(name, birthdate, admission_date, job_role, projects, id)
       // request.whoiam
+      reply.send(result)
+    } catch (error) {
+      reply.send(error)
+    }
+  })
+
+  /*
+   * rota para deletar
+   * um naver
+   */
+
+  fastify.delete('/:id_naver', {
+    preValidation: [fastify.authenticate]
+  },
+  async (request, reply) => {
+    try {
+      const { id } = request.whoiam
+      // eslint-disable-next-line camelcase
+      const { id_naver } = request.params
+      const result = await naverInstance.delete(id, id_naver)
       reply.send(result)
     } catch (error) {
       reply.send(error)

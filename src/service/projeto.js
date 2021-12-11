@@ -83,6 +83,9 @@ class Projeto {
       if ((navers_result.length === navers.length)) {
         projeto = await this.model.returning(['id', 'name']).update({
           name
+        }).where({
+          'projeto.id': id_projeto,
+          'projeto.id_user': id_user
         })
 
         await this.fastify.knex('naver_projeto').where('naver_projeto.id_projeto', id_projeto)
@@ -102,6 +105,9 @@ class Projeto {
         .del()
       projeto = await this.model.returning(['id', 'name']).update({
         name
+      }).where({
+        'projeto.id': id_projeto,
+        'projeto.id_user': id_user
       })
 
       projeto[0].navers = []
