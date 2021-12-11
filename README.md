@@ -20,147 +20,382 @@ API de um sistema web para visualização e criação dos navers, com autentica�
 5. Ainda na raiz do projeto execute o seguinte comando para criar as tabelas do banco de dados `npx knex migrate:latest`
 6. executa o seguinente comandando `npm run start` para rodar o projeto e copia e cola no navegador a seguinte url `http://localhost:3000/ping` para verificar se a instalação foi bem sucedida.
 
-## Detalhes da api
+# Project: claudio-navedex
 
-### Usuário (publica)
+API de um sistema web para visualização e criação dos navers, com autenticação e possuindo informações como: nomes, idades, cargos, tempo de empresa e projetos que participa.
 
-#### criar um novo usuário
+# 📁 Collection: user
 
-##### POST signup
+## End-point: signup
 
-`http://localhost:3000/users/signup`
+rota para criar um novo usuario
 
-Example Request
+### Method: POST
 
-```
-curl --location --request POST 'http://localhost:3000/users/signup' \
---data-raw '{
-    "email":"claudi5@gmail.com",
-    "password":"BI)2KjufPySB0ilcnWkf@Wg)"
-}'
-```
+> ```
+> http://localhost:3000/users/signup
+> ```
 
-Example Response 200 ok
+### Body (**raw**)
 
-```
-- Header
-  content-type: application/json; charset=utf-8
-  content-length: 4
-  Date: Thu, 09 Dec 2021 03:05:27 GMT
-  Connection: keep-alive
-  Keep-Alive: timeout=5
-
-- Body
-  true
+```json
+{
+  "email": "claudi5@gmail.com",
+  "password": "BI)2KjufPySB0ilcnWkf@Wg)"
+}
 ```
 
-#### Fazer login com o usuário criado
+### Response: 200
 
-##### POST login
-
-`http://localhost:3000/users/login`
-
-Example Request
-
-```
-curl --location --request POST 'http://localhost:3000/users/login' \
---data-raw '{
-    "email":"claudi5@gmail.com",
-    "password":"BI)2KjufPySB0ilcnWkf@Wg)"
-}'
+```json
+true
 ```
 
-Example Response 200 ok
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
+## End-point: login
+
+### Method: POST
+
+> ```
+> http://localhost:3000/users/login
+> ```
+
+### Body (**raw**)
+
+```json
+{
+  "email": "emaildteste@gmail.com",
+  "password": "12#rer"
+}
 ```
-- Header
-  content-type: application/json; charset=utf-8
-  content-length: 329
-  Date: Thu, 09 Dec 2021 03:28:07 GMT
-  Connection: keep-alive
-  Keep-Alive: timeout=5
 
-- Body
-  {
+### Response: 200
+
+```json
+{
   "id": 10,
   "email": "claudi5@gmail.com",
   "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImVtYWlsIjoiY2xhdWRpNUBnbWFpbC5jb20iLCJpYXQiOjE2MzkwMjA0ODd9.gXMIVqBla5_c1Dd4oVdC5PElsszLsUvP1-FvVwKGZ6-t-OC6All5je7bcTLDwufWmw0L41YNTV9x_2V-pi4kcOvDhkngy5kSIaenEPc4FKN63Oo2Pg9W9KEHBsKmQFwxtGgcesexa2Et7rt3tIWfn5Z3YrdLSxDgrCWqMhiWQpw"
-  }
+}
 ```
 
-### Projeto (privada)
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-#### criar um novo projeto
+# 📁 Collection: projeto
 
-##### POST create
+## End-point: index
 
-`http://localhost:3000/projetos`
+### Method: GET
 
-AUTHORIZATION Bearer Token
+> ```
+> http://localhost:3000/projetos
+> ```
 
-Example Request
+### 🔑 Authentication bearer
 
-```
-curl --location --request POST 'http://localhost:3000/projetos' \
---data-raw '{
-    "name":"wordpress"
-}'
-```
+| Param | value      | Type   |
+| ----- | ---------- | ------ |
+| token | {{token }} | string |
 
-Example Response 200 ok
+### Response: 200
 
-```
-- Header
-  content-type: application/json; charset=utf-8
-  content-length: 28
-  Date: Thu, 09 Dec 2021 04:00:15 GMT
-  Connection: keep-alive
-  Keep-Alive: timeout=5
-
-- Body
+```json
+[
   {
-  "id": 12,
-  "name": "wordpress"
+    "id": 10,
+    "name": "trabalhando com java"
+  },
+  {
+    "id": 11,
+    "name": "desenvolvimento de loja virtual"
+  },
+  {
+    "id": 12,
+    "name": "wordpress"
   }
+]
 ```
 
-#### lista todos projetos
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-##### GET index
+## End-point: show
 
-`http://localhost:3000/projetos`
+### Method: GET
 
-AUTHORIZATION Bearer Token
+> ```
+> http://localhost:3000/projetos/2
+> ```
 
-Example Request
+### 🔑 Authentication bearer
 
-```
-curl --location --request GET 'http://localhost:3000/projetos'
-```
+| Param | value      | Type   |
+| ----- | ---------- | ------ |
+| token | {{token }} | string |
 
-Example Response 200 ok
+### Response: 200
 
-```
-- Header
-  content-type: application/json; charset=utf-8
-  content-length: 121
-  Date: Thu, 09 Dec 2021 04:10:37 GMT
-  Connection: keep-alive
-  Keep-Alive: timeout=5
-
-- Body
-  [
+```json
+{
+  "id": 1,
+  "name": "Trabalhando com Java",
+  "navers": [
     {
-      "id": 10,
-      "name": "trabalhando com java"
+      "id": 1,
+      "name": "Christian Tavares",
+      "birthdate": "1992-04-12T03:00:00.000Z",
+      "admission_date": "2018-08-19T03:00:00.000Z",
+      "job_role": "Desenvolvedor",
+      "id_user": 1
     },
     {
-      "id": 11,
-      "name": "desenvolvimento de loja virtual"
-    },
-    {
-      "id": 12,
-      "name": "wordpress"
+      "id": 2,
+      "name": "Daina",
+      "birthdate": "1992-04-12T03:00:00.000Z",
+      "admission_date": "2018-08-19T03:00:00.000Z",
+      "job_role": "Teste",
+      "id_user": 1
     }
   ]
+}
 ```
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: store
+
+### Method: POST
+
+> ```
+> http://localhost:3000/projetos
+> ```
+
+### Body (**raw**)
+
+```json
+{
+  "name": "teste",
+  "navers": []
+}
+```
+
+### 🔑 Authentication bearer
+
+| Param | value                                                                                                                                                                                                                                                                                     | Type   |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| token | eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImVtYWlsIjoiY2xhdWRpNUBnbWFpbC5jb20iLCJpYXQiOjE2MzkwMjA0ODd9.gXMIVqBla5_c1Dd4oVdC5PElsszLsUvP1-FvVwKGZ6-t-OC6All5je7bcTLDwufWmw0L41YNTV9x_2V-pi4kcOvDhkngy5kSIaenEPc4FKN63Oo2Pg9W9KEHBsKmQFwxtGgcesexa2Et7rt3tIWfn5Z3YrdLSxDgrCWqMhiWQpw | string |
+
+### Response: 200
+
+```json
+{
+  "id": 17,
+  "name": "wordpress",
+  "navers": [
+    {
+      "id": 7
+    },
+    {
+      "id": 8
+    }
+  ]
+}
+```
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: Delete
+
+Rota Para Deletar um Projeto
+
+### Method: DELETE
+
+> ```
+> http://localhost:3000/projetos/14
+> ```
+
+### 🔑 Authentication bearer
+
+| Param | value      | Type   |
+| ----- | ---------- | ------ |
+| token | {{token }} | string |
+
+### Response: 200
+
+```json
+1
+```
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: Update
+
+### Method: PUT
+
+> ```
+> http://localhost:3000/projetos/1
+> ```
+
+### Body (**raw**)
+
+```json
+{
+  "name": "daina",
+  "navers": [1, 2]
+}
+```
+
+### 🔑 Authentication bearer
+
+| Param | value      | Type   |
+| ----- | ---------- | ------ |
+| token | {{token }} | string |
+
+### Response: 200
+
+```json
+{
+  "id": 1,
+  "name": "claudio",
+  "navers": [1, 2]
+}
+```
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+# 📁 Collection: naver
+
+## End-point: index
+
+### Method: GET
+
+> ```
+> http://localhost:3000/navers
+> ```
+
+### 🔑 Authentication bearer
+
+| Param | value      | Type   |
+| ----- | ---------- | ------ |
+| token | {{token }} | string |
+
+### Response: 200
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Christian Tavares",
+    "birthdate": "1992-04-12T03:00:00.000Z",
+    "admission_date": "2018-08-19T03:00:00.000Z",
+    "job_role": "Desenvolvedor"
+  },
+  {
+    "id": 2,
+    "name": "Daina",
+    "birthdate": "1992-04-12T03:00:00.000Z",
+    "admission_date": "2018-08-19T03:00:00.000Z",
+    "job_role": "Teste"
+  }
+]
+```
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: show
+
+### Method: GET
+
+> ```
+> http://localhost:3000/navers/1
+> ```
+
+### 🔑 Authentication bearer
+
+| Param | value      | Type   |
+| ----- | ---------- | ------ |
+| token | {{token }} | string |
+
+### Response: 200
+
+```json
+{
+  "id": 1,
+  "name": "Christian Tavares",
+  "birthdate": "1992-04-12T03:00:00.000Z",
+  "admission_date": "2018-08-19T03:00:00.000Z",
+  "job_role": "Desenvolvedor",
+  "projects": [
+    {
+      "id": 1,
+      "name": "Trabalhando com Java"
+    },
+    {
+      "id": 2,
+      "name": "PHP"
+    }
+  ]
+}
+```
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: store
+
+### Method: POST
+
+> ```
+> http://localhost:3000/navers
+> ```
+
+### Headers
+
+| Content-Type | Value            |
+| ------------ | ---------------- |
+| Content-Type | application/json |
+
+### Body (**raw**)
+
+```json
+{
+  "job_role": "Desenvolvedor",
+  "admission_date": "19/08/2018",
+  "birthdate": "12/04/1992",
+  "project": "Project Backend Test",
+  "name": "Christian Tavares"
+}
+```
+
+### 🔑 Authentication bearer
+
+| Param | value     | Type   |
+| ----- | --------- | ------ |
+| token | {{token}} | string |
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: Delete
+
+### Method: DELETE
+
+> ```
+> http://localhost:3000/navers/1
+> ```
+
+### 🔑 Authentication bearer
+
+| Param | value      | Type   |
+| ----- | ---------- | ------ |
+| token | {{token }} | string |
+
+### Response: 200
+
+```json
+1
+```
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+---
+
+Powered By: [postman-to-markdown](https://github.com/bautistaj/postman-to-markdown/)
