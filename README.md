@@ -2,16 +2,16 @@
 
 API de um sistema web para visualização e criação dos navers, com autenticação e possuindo informações como: nomes, idades, cargos, tempo de empresa e projetos que participa. A documentação completa da api desenvolvida pode ser acessada clicando <a href="https://documenter.getpostman.com/view/14806594/UVJkBtfB">aqui</a>
 
-## Modelo Lógico
+# Modelo Lógico
 
 !["modelo_logico"](public/img/modelo_logico_certo.png)
 
-## Pré-requisito
+# Pré-requisito
 
 - [x] Node.js - você pode saber mais <a href="https://nodejs.org/en/about/">aqui</a>
 - [x] PostgreSQL - você pode saber mais <a href="https://www.postgresql.org/">aqui</a>
 
-## Instalação
+# Instalação
 
 1. Clona o projeto no diretório da tua maquina.
 2. Cria um banco de dados de nome 'navedex' `CREATE DATABASE navedex; `
