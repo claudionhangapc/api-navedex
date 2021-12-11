@@ -67,6 +67,34 @@ module.exports = function (fastify, option, done) {
   })
 
   /*
+   * rota para atualizar projeto
+   */
+
+  fastify.put('/:id_projeto', {
+    preValidation: [fastify.authenticate]
+  },
+  async (request, reply) => {
+    try {
+      // eslint-disable-next-line camelcase
+      const { id_projeto } = request.params
+      const { name } = request.body
+      const { id } = request.whoiam
+      const { navers } = request.body
+      const projeto = await projetoInstance.update(name, id, navers, id_projeto)
+      if ('messageError' in projeto) {
+        reply
+          .code(404)
+          .send({ message: ' navers não encontrada' })
+      } else {
+        reply.send(projeto)
+      }
+      reply.send(projeto)
+    } catch (error) {
+      reply.send(error)
+    }
+  })
+
+  /*
    * rota para deletar
    * um projeto
    */

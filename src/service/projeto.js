@@ -70,6 +70,47 @@ class Projeto {
   }
 
   /*
+   * atualizar um projeto
+   * de um determina usuario
+   */
+  async update (name, id_user, navers, id_projeto) {
+    let projeto
+    if (navers.length > 0) {
+      const navers_result = await this.fastify.knex.select('id')
+        .from('naver')
+        .whereIn('id', navers)
+      // eslint-disable-next-line no-undef
+      if ((navers_result.length === navers.length)) {
+        projeto = await this.model.returning(['id', 'name']).update({
+          name
+        })
+
+        await this.fastify.knex('naver_projeto').where('naver_projeto.id_projeto', id_projeto)
+          .del()
+        const navers_projetos = this.reduceNaverProjeto(navers, projeto[0].id)
+        const navers_projetos_result = await this.fastify.knex('naver_projeto').returning(['id_naver']).insert(navers_projetos)
+
+        projeto[0].navers = navers_projetos_result.map(naver => naver.id_naver)
+      } else {
+        projeto = []
+        projeto[0] = {
+          messageError: 'error'
+        }
+      }
+    } else {
+      await this.fastify.knex('naver_projeto').where('naver_projeto.id_projeto', id_projeto)
+        .del()
+      projeto = await this.model.returning(['id', 'name']).update({
+        name
+      })
+
+      projeto[0].navers = []
+    }
+
+    return projeto[0]
+  }
+
+  /*
    * obter todos projetos
    * e navers associados
    */
