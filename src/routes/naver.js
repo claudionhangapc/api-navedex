@@ -29,13 +29,13 @@ module.exports = function (fastify, option, done) {
    * e projetos assossiados
    */
 
-  fastify.get('/:id', {
+  fastify.get('/:id_naver', {
     preValidation: [fastify.authenticate]
   },
   async (request, reply) => {
     try {
       const id_user = request.whoiam.id
-      const id_naver = request.params.id
+      const id_naver = request.params.id_naver
       const result = await naverInstance.fetchNaverById(id_user, id_naver)
       reply.send(result)
     } catch (error) {

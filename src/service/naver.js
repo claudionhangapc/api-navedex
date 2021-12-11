@@ -77,17 +77,17 @@ class Naver {
    * na qual participa
    */
 
-  async fetchNaverById (id_user, id) {
-    const naver = await this.model.select('id', 'name', ' birthdate', 'admission_date', 'job_role').where({
-      id_user,
-      id
+  async fetchNaverById (id_user, id_naver) {
+    const naver = await this.fastify.knex.select('id', 'name', ' birthdate', 'admission_date', 'job_role').from('naver').where({
+      id_user: id_user,
+      id: id_naver
     })
 
     const projeto = await this.fetchSingleNaverAndAllProject(naver[0].id)
     const resultNaver = naver[0]
     resultNaver.projects = projeto
 
-    return resultNaver
+    return naver
   }
 
   /*
