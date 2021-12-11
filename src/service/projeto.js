@@ -74,12 +74,14 @@ class Projeto {
    * e navers associados
    */
   async show (id_user, id_projeto) {
-    let result = await this.model.select(' naver.* ', ' projeto.id as projeto_id ', ' projeto.name as projeto_name').where({
-      'projeto.id': id_projeto,
-      'projeto.id_user': id_user
-    })
-      .innerJoin('naver_projeto', 'projeto.id', 'naver_projeto.id_projeto')
-      .innerJoin('naver', 'naver.id', 'naver_projeto.id_naver')
+    let result = await this.fastify.knex('projeto')
+      .where({
+        'projeto.id': id_projeto,
+        'projeto.id_user': id_user
+      })
+      .join('naver_projeto', 'projeto.id', '=', 'naver_projeto.id_projeto')
+      .join('naver', 'naver.id', '=', 'naver_projeto.id_naver')
+      .select('projeto.name as projeto_name', 'projeto.id as projeto_id', 'naver.*')
 
     if (result.length > 0) {
       const projeto = {}
