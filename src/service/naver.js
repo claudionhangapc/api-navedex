@@ -37,24 +37,43 @@ class Naver {
    */
   // eslint-disable-next-line camelcase
   async create (name, birthdate, admission_date, job_role, projects, id_user) {
-    const naver = await this.model.returning(['id', 'name', 'birthdate', 'admission_date', 'job_role']).insert({
-      name,
-      birthdate,
-      admission_date,
-      job_role,
-      id_user
-    })
-
+    let naver
     if (projects.length > 0) {
-      const naverProjeto = await this.reduceNaverProjeto(projects, naver[0].id)
-      const insertNaverProjeto = await this.fastify.knex('naver_projeto').insert(naverProjeto)
+      const projeto_result = await this.fastify.knex.select('id')
+        .from('projeto')
+        .whereIn('id', projects)
+      // eslint-disable-next-line no-undef
+      if ((projeto_result.length === projects.length)) {
+        naver = await this.model.returning(['id', 'name', 'birthdate', 'admission_date', 'job_role']).insert({
+          name,
+          birthdate,
+          admission_date,
+          job_role,
+          id_user
+        })
+        const navers_projetos = this.reduceNaverProjeto(projects, naver[0].id)
+        const navers_projetos_result = await this.fastify.knex('naver_projeto').returning(['id_projeto']).insert(navers_projetos)
+
+        naver[0].navers = navers_projetos_result.map(projeto => projeto.id_projeto)
+      } else {
+        naver = []
+        naver[0] = {
+          messageError: 'error'
+        }
+      }
+    } else {
+      naver = await this.model.returning(['id', 'name', 'birthdate', 'admission_date', 'job_role']).insert({
+        name,
+        birthdate,
+        admission_date,
+        job_role,
+        id_user
+      })
+
+      naver[0].projects = []
     }
 
-    const projeto = await this.fetchSingleNaverAndAllProject(naver[0].id)
-    const resultNaver = naver[0]
-    resultNaver.projects = projeto
-
-    return resultNaver
+    return naver[0]
   }
 
   /*

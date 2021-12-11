@@ -59,9 +59,14 @@ module.exports = function (fastify, option, done) {
 
       const { id } = request.whoiam
 
-      const result = await naverInstance.create(name, birthdate, admission_date, job_role, projects, id)
-      // request.whoiam
-      reply.send(result)
+      const naver = await naverInstance.create(name, birthdate, admission_date, job_role, projects, id)
+      if ('messageError' in naver) {
+        reply
+          .code(404)
+          .send({ message: ' projetos não encontrada' })
+      } else {
+        reply.send(naver)
+      }
     } catch (error) {
       reply.send(error)
     }
