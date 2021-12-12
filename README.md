@@ -20,15 +20,14 @@ API de um sistema web para visualização e criação dos navers, com autentica�
 5. Ainda na raiz do projeto execute o seguinte comando para criar as tabelas do banco de dados `npx knex migrate:latest` e `npx knex seed:run` para preencher as tabelas com dados inicias.
 6. executa o seguinente comandando `npm run start` para rodar o projeto e copia e cola no navegador a seguinte url `http://localhost:3000/ping` para verificar se a instalação foi bem sucedida.
 
-# API: Doc
+# Project: api-navedex
 
-API de um sistema web para visualização e criação dos navers, com autenticação e possuindo informações como: nomes, idades, cargos, tempo de empresa e projetos que participa.
-
-# 📁 Collection: user
+## 📁 Collection: user
 
 ## End-point: signup
 
-rota para criar um novo usuario
+Rota para criar um novo usuário  
+Deverá receber email e senha e criar novo registro no banco
 
 ### Method: POST
 
@@ -55,6 +54,9 @@ true
 
 ## End-point: login
 
+Rota para poder logar no sistema  
+Deverá retornar um token JWT para o usuário ter acesso à outras rotas
+
 ### Method: POST
 
 > ```
@@ -74,17 +76,21 @@ true
 
 ```json
 {
-  "id": 10,
-  "email": "claudi5@gmail.com",
-  "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImVtYWlsIjoiY2xhdWRpNUBnbWFpbC5jb20iLCJpYXQiOjE2MzkwMjA0ODd9.gXMIVqBla5_c1Dd4oVdC5PElsszLsUvP1-FvVwKGZ6-t-OC6All5je7bcTLDwufWmw0L41YNTV9x_2V-pi4kcOvDhkngy5kSIaenEPc4FKN63Oo2Pg9W9KEHBsKmQFwxtGgcesexa2Et7rt3tIWfn5Z3YrdLSxDgrCWqMhiWQpw"
+  "id": 1,
+  "email": "emaildteste@gmail.com",
+  "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJlbWFpbGR0ZXN0ZUBnbWFpbC5jb20iLCJpYXQiOjE2MzkyNzA5NzF9.QmE-ighkQcQxVqn5rWx2hGubbGc3rPwaKWo7NlHH2toA7Oq31DVKUdESm5VopOYYm-9SFjyiXmXREO8aDwOevUZ0DLrxWfE5TDPPp3Ytw9gDb7MppVMScpoZ4mT6u5-rFJ5cEU4TCANBAGDcrrqjXs2DHfc7_nlBSduBduGSQqM"
 }
 ```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-# 📁 Collection: projeto
+## 📁 Collection: projeto
 
 ## End-point: index
+
+Rota para listagem dos Projetos
+
+O retorno é um array com todos os projetos, pertencentes ao usuário que fez a request,
 
 ### Method: GET
 
@@ -121,11 +127,20 @@ true
 
 ## End-point: show
 
+Rota para detalhar um projeto  
+Além das informações do projeto, trazer quais foram os navers que participaram
+
 ### Method: GET
 
 > ```
-> http://localhost:3000/projetos/2
+> http://localhost:3000/projetos/1
 > ```
+
+### Body (**raw**)
+
+```json
+
+```
 
 ### 🔑 Authentication bearer
 
@@ -174,16 +189,16 @@ true
 
 ```json
 {
-  "name": "teste",
-  "navers": []
+  "name": "teste7",
+  "navers": [1]
 }
 ```
 
 ### 🔑 Authentication bearer
 
-| Param | value                                                                                                                                                                                                                                                                                     | Type   |
-| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| token | eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImVtYWlsIjoiY2xhdWRpNUBnbWFpbC5jb20iLCJpYXQiOjE2MzkwMjA0ODd9.gXMIVqBla5_c1Dd4oVdC5PElsszLsUvP1-FvVwKGZ6-t-OC6All5je7bcTLDwufWmw0L41YNTV9x_2V-pi4kcOvDhkngy5kSIaenEPc4FKN63Oo2Pg9W9KEHBsKmQFwxtGgcesexa2Et7rt3tIWfn5Z3YrdLSxDgrCWqMhiWQpw | string |
+| Param | value      | Type   |
+| ----- | ---------- | ------ |
+| token | {{token }} | string |
 
 ### Response: 200
 
@@ -204,31 +219,11 @@ true
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-## End-point: Delete
-
-Rota Para Deletar um Projeto
-
-### Method: DELETE
-
-> ```
-> http://localhost:3000/projetos/14
-> ```
-
-### 🔑 Authentication bearer
-
-| Param | value      | Type   |
-| ----- | ---------- | ------ |
-| token | {{token }} | string |
-
-### Response: 200
-
-```json
-1
-```
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
 ## End-point: Update
+
+Rota Para Atualização de Projeto
+
+Recebe através do body da request os dados do projeto e um array com os identificadores dos navers que trabalham nele e atualiza seu registro no banco de dados
 
 ### Method: PUT
 
@@ -241,7 +236,7 @@ Rota Para Deletar um Projeto
 ```json
 {
   "name": "daina",
-  "navers": [1, 2]
+  "navers": [1]
 }
 ```
 
@@ -263,9 +258,37 @@ Rota Para Deletar um Projeto
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-# 📁 Collection: naver
+## End-point: Delete
+
+Rota Para Deletar um Projeto  
+Recebe um identificador de projeto e o remove dos registros do banco
+
+### Method: DELETE
+
+> ```
+> http://localhost:3000/projetos/14
+> ```
+
+### 🔑 Authentication bearer
+
+| Param | value      | Type   |
+| ----- | ---------- | ------ |
+| token | {{token }} | string |
+
+### Response: 200
+
+```json
+1
+```
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## 📁 Collection: naver
 
 ## End-point: index
+
+O retorno é um array com todos os navers  
+O retorno é um array com todos os navers, pertencentes ao usuário que fez a request
 
 ### Method: GET
 
@@ -304,10 +327,13 @@ Rota Para Deletar um Projeto
 
 ## End-point: show
 
+Rota para detalhar informações de um único naver através de seu identificador  
+Além das informações do naver, trazer quais projetos este participou
+
 ### Method: GET
 
 > ```
-> http://localhost:3000/navers/1
+> http://localhost:3000/navers/2
 > ```
 
 ### 🔑 Authentication bearer
@@ -342,6 +368,9 @@ Rota Para Deletar um Projeto
 
 ## End-point: store
 
+Rota de Criação de Naver  
+Recebe através do body da request os dados do naver e um array com os identificadores dos projetos que ele participa e cria um novo registro no banco de dados vinculado ao usuário que fez a request
+
 ### Method: POST
 
 > ```
@@ -362,19 +391,67 @@ Rota Para Deletar um Projeto
   "admission_date": "19/08/2018",
   "birthdate": "12/04/1992",
   "project": "Project Backend Test",
-  "name": "Christian Tavares"
+  "name": "Christian Tavares",
+  "projects": [1, 2]
 }
 ```
 
 ### 🔑 Authentication bearer
 
-| Param | value     | Type   |
-| ----- | --------- | ------ |
-| token | {{token}} | string |
+| Param | value      | Type   |
+| ----- | ---------- | ------ |
+| token | {{token }} | string |
+
+### Response: 200
+
+```json
+{
+  "id": 11,
+  "name": "Christian Tavares",
+  "birthdate": "1992-04-12T03:00:00.000Z",
+  "admission_date": "2018-08-19T03:00:00.000Z",
+  "job_role": "Desenvolvedor",
+  "projects": [1, 2]
+}
+```
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: Update
+
+Recebe através do body da request os dados do naver e um array com os identificadores dos projetos que ele participa e atualiza seu registro no banco de dados
+
+### Method: PUT
+
+> ```
+> http://localhost:3000/navers
+> ```
+
+### 🔑 Authentication bearer
+
+| Param | value      | Type   |
+| ----- | ---------- | ------ |
+| token | {{token }} | string |
+
+### Response: 200
+
+```json
+{
+  "id": 9,
+  "name": "claudio nhanga",
+  "birthdate": "1992-04-12T03:00:00.000Z",
+  "admission_date": "2018-08-19T03:00:00.000Z",
+  "job_role": "Desenvolvedor",
+  "navers": [1, 2]
+}
+```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
 ## End-point: Delete
+
+Rota Para Deletar um Naver  
+Recebe um identificador de projeto e o remove dos registros do banco.
 
 ### Method: DELETE
 

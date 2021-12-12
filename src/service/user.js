@@ -14,7 +14,7 @@ class User {
     try {
       const bcrypt = require('bcrypt')
 
-      const user = await this.model.insert({
+      await this.model.insert({
         email,
         password: bcrypt.hashSync(password, PASSWORD_SALT)
       })
@@ -37,20 +37,10 @@ class User {
       })
 
       if ((user.length > 0) && (bcrypt.compareSync(password, user[0].password))) {
-        const {
-          id,
-          email
-        } = user[0]
-        const payload = {
-          id,
-          email
-        }
+        const { id, email } = user[0]
+        const payload = { id, email }
         const token = this.jwt.sign(payload)
-        return {
-          id,
-          email,
-          token
-        }
+        return { id, email, token }
       } else {
         return {
           statusCode: 400,

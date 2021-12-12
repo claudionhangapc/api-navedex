@@ -35,7 +35,62 @@ class Naver {
    * criar projeto
    * de um determina usuario
    */
-  // eslint-disable-next-line camelcase
+
+  async update (name, birthdate, admission_date, job_role, projects, id_user, id_naver) {
+    let naver
+    if (projects.length > 0) {
+      const projeto_result = await this.fastify.knex.select('id')
+        .from('projeto')
+        .whereIn('id', projects)
+      // eslint-disable-next-line no-undef
+      if ((projeto_result.length === projects.length)) {
+        naver = await this.model.returning(['id', 'name', 'birthdate', 'admission_date', 'job_role']).update({
+          name,
+          birthdate,
+          admission_date,
+          job_role,
+          id_user
+        }).where({
+          'naver.id': id_naver,
+          'naver.id_user': id_user
+        })
+
+        await this.fastify.knex('naver_projeto').where('naver_projeto.id_naver', id_naver).del()
+        const navers_projetos = this.reduceNaverProjeto(projects, naver[0].id)
+        const navers_projetos_result = await this.fastify.knex('naver_projeto').returning(['id_projeto']).insert(navers_projetos)
+
+        naver[0].projects = navers_projetos_result.map(projeto => projeto.id_projeto)
+      } else {
+        naver = []
+        naver[0] = {
+          messageError: 'error'
+        }
+      }
+    } else {
+      await this.fastify.knex('naver_projeto').where('naver_projeto.id_naver', id_naver)
+        .del()
+      naver = await this.model.returning(['id', 'name', 'birthdate', 'admission_date', 'job_role']).update({
+        name,
+        birthdate,
+        admission_date,
+        job_role,
+        id_user
+      }).where({
+        'naver.id': id_naver,
+        'naver.id_user': id_user
+      })
+
+      naver[0].projects = []
+    }
+
+    return naver[0]
+  }
+
+  /*
+   * criar projeto
+   * de um determina usuario
+   */
+
   async create (name, birthdate, admission_date, job_role, projects, id_user) {
     let naver
     if (projects.length > 0) {
@@ -54,7 +109,7 @@ class Naver {
         const navers_projetos = this.reduceNaverProjeto(projects, naver[0].id)
         const navers_projetos_result = await this.fastify.knex('naver_projeto').returning(['id_projeto']).insert(navers_projetos)
 
-        naver[0].navers = navers_projetos_result.map(projeto => projeto.id_projeto)
+        naver[0].projects = navers_projetos_result.map(projeto => projeto.id_projeto)
       } else {
         naver = []
         naver[0] = {

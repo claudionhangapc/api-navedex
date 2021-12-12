@@ -73,6 +73,36 @@ module.exports = function (fastify, option, done) {
   })
 
   /*
+   * criar naver
+   */
+
+  fastify.put('/:id_naver', {
+    preValidation: [fastify.authenticate]
+  },
+  async (request, reply) => {
+    try {
+      const {
+        name, birthdate,
+        admission_date, job_role, projects
+      } = request.body
+
+      const { id } = request.whoiam
+      const id_naver = request.params.id_naver
+
+      const naver = await naverInstance.update(name, birthdate, admission_date, job_role, projects, id, id_naver)
+      if ('messageError' in naver) {
+        reply
+          .code(404)
+          .send({ message: ' projetos não encontrada' })
+      } else {
+        reply.send(naver)
+      }
+    } catch (error) {
+      reply.send(error)
+    }
+  })
+
+  /*
    * rota para deletar
    * um naver
    */
