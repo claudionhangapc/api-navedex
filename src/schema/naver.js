@@ -1,43 +1,60 @@
-const userLogin = {
+const naverCreate = {
   response: {
     200: {
       type: 'object',
       properties: {
         id: { type: 'integer' },
-        email: { type: 'string' },
-        token: { type: 'string' }
+        job_role: { type: 'string' },
+        admission_date: { type: 'string' },
+        birthdate: { type: 'string' },
+        name: { type: 'string' },
+        projects: { type: 'array' }
       }
     }
   },
   body: {
     type: 'object',
     additionalProperties: false,
-    required: ['email', 'password'],
+    required: ['job_role', 'admission_date', 'birthdate', 'name', 'projects'],
     properties: {
-      email: { type: 'string' },
-      password: { type: 'string' }
+      job_role: { type: 'string' },
+      admission_date: { type: 'string' },
+      birthdate: { type: 'string' },
+      name: { type: 'string' },
+      projects: { type: 'array' }
     }
   }
 }
 
-const userSign = {
+const naverUpdate = {
   response: {
     200: {
-      type: 'boolean'
+      type: 'object',
+      properties: {
+        id: { type: 'integer' },
+        job_role: { type: 'string' },
+        admission_date: { type: 'string' },
+        birthdate: { type: 'string' },
+        name: { type: 'string' },
+        projects: { type: 'array' }
+      }
     }
   },
   body: {
     type: 'object',
     additionalProperties: false,
-    required: ['email', 'password'],
+    required: ['job_role', 'admission_date', 'birthdate', 'name', 'projects'],
     properties: {
-      email: { type: 'string' },
-      password: { type: 'string' }
+      job_role: { type: 'string' },
+      admission_date: { type: 'string' },
+      birthdate: { type: 'string' },
+      name: { type: 'string' },
+      projects: { type: 'array' }
     }
   }
 }
 
 module.exports = {
-  userLogin,
-  userSign
+  naverCreate,
+  naverUpdate
 }

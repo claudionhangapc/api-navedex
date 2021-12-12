@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 const naver = require('../service/naver')
-
+const schema = require('../schema/naver')
 module.exports = function (fastify, option, done) {
   // eslint-disable-next-line new-cap
   const naverInstance = new naver(fastify)
@@ -48,7 +48,8 @@ module.exports = function (fastify, option, done) {
    */
 
   fastify.post('/', {
-    preValidation: [fastify.authenticate]
+    preValidation: [fastify.authenticate],
+    schema: schema.naverCreate
   },
   async (request, reply) => {
     try {
@@ -73,11 +74,12 @@ module.exports = function (fastify, option, done) {
   })
 
   /*
-   * criar naver
+   * atualizar naver
    */
 
   fastify.put('/:id_naver', {
-    preValidation: [fastify.authenticate]
+    preValidation: [fastify.authenticate],
+    schema: schema.naverUpdate
   },
   async (request, reply) => {
     try {
